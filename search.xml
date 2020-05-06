@@ -20,7 +20,9 @@
       
         <tags>
             
-            <tag> -c++ -笔记 </tag>
+            <tag> c++ </tag>
+            
+            <tag> 运算符重载 </tag>
             
         </tags>
       
@@ -29,7 +31,7 @@
     
     
     <entry>
-      <title>c++string</title>
+      <title>字符串操作</title>
       <link href="/2020/05/06/c-string/"/>
       <url>/2020/05/06/c-string/</url>
       
@@ -46,6 +48,8 @@
         <tags>
             
             <tag> c++ </tag>
+            
+            <tag> String </tag>
             
         </tags>
       

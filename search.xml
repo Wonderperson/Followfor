@@ -112,6 +112,33 @@
     
     
     <entry>
+      <title>0602leetcode_2</title>
+      <link href="/2020/06/01/202006022-2/"/>
+      <url>/2020/06/01/202006022-2/</url>
+      
+        <content type="html"><![CDATA[<h1 id="498-对角线遍历"><a href="#498-对角线遍历" class="headerlink" title="498. 对角线遍历"></a>498. 对角线遍历</h1><h2 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h2><p><img src="https://raw.githubusercontent.com/Wonderperson/picturebed/master/imags_for_study/20200602204854.png" alt="20200602204854"></p><h3 id="解法："><a href="#解法：" class="headerlink" title="解法："></a>解法：</h3><p>设置一个bool类型的值用来判断对角线遍历的方向是从下往上的还是从上往下的。然后再采取不同的措施。注意开始判断二维数组为空的情况，经测试只能放在开头才不会报错，原因不知。两种判断方式均可，但用 <strong>empty()</strong> 函数据说效率会高一点。</p><p>注意好各种边界值的判断就好做了。</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; <span class="title">findDiagonalOrder</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&gt;&amp; matrix)</span> </span>&#123;</span><br><span class="line">            <span class="comment">//if (matrix.size() == 0 || matrix[0].size() == 0) return &#123;&#125;;</span></span><br><span class="line">            <span class="keyword">if</span> (matrix.empty() || matrix[<span class="number">0</span>].empty()) <span class="keyword">return</span> &#123;&#125;;</span><br><span class="line">            <span class="keyword">bool</span> updown = <span class="literal">false</span>;</span><br><span class="line">            <span class="keyword">int</span> row = matrix.<span class="built_in">size</span>();</span><br><span class="line">            <span class="keyword">int</span> cl = matrix[<span class="number">0</span>].<span class="built_in">size</span>();</span><br><span class="line">            </span><br><span class="line">            <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; pac;</span><br><span class="line">            <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">            <span class="keyword">while</span>(i &lt; row &amp;&amp; j &lt; cl)&#123;</span><br><span class="line">                  <span class="keyword">if</span>(updown == <span class="literal">true</span>)&#123;         <span class="comment">//从上往下遍历</span></span><br><span class="line">                        pac.push_back(matrix[i][j]);</span><br><span class="line">                        <span class="keyword">while</span>((j - <span class="number">1</span> &gt; <span class="number">0</span> || j - <span class="number">1</span> == <span class="number">0</span>) &amp;&amp; i + <span class="number">1</span> &lt; row )&#123;</span><br><span class="line">                            pac.push_back(matrix[++i][--j]);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span>(i == row - <span class="number">1</span>)   <span class="comment">//换行判断</span></span><br><span class="line">                            j++;</span><br><span class="line">                        <span class="keyword">else</span> i++;</span><br><span class="line">                        updown = <span class="literal">false</span>;   <span class="comment">//改变方向</span></span><br><span class="line">                  &#125;</span><br><span class="line">                  <span class="keyword">else</span> <span class="keyword">if</span>(updown == <span class="literal">false</span>)&#123;     <span class="comment">//从下往上遍历</span></span><br><span class="line">                        pac.push_back(matrix[i][j]);</span><br><span class="line">                        <span class="keyword">while</span>((i - <span class="number">1</span> &gt; <span class="number">0</span> || i - <span class="number">1</span> == <span class="number">0</span>) &amp;&amp; j + <span class="number">1</span> &lt; cl )&#123;</span><br><span class="line">                            pac.push_back(matrix[--i][++j]);</span><br><span class="line">                        &#125;</span><br><span class="line">                        <span class="keyword">if</span>(j == cl - <span class="number">1</span>)</span><br><span class="line">                            i++;</span><br><span class="line">                        <span class="keyword">else</span> j++;</span><br><span class="line">                        updown = <span class="literal">true</span>;</span><br><span class="line">                  &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> pac;  </span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> leetcode刷题记录 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> leetcode </tag>
+            
+            <tag> 题解 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>输入输出流</title>
       <link href="/2020/05/12/inout/"/>
       <url>/2020/05/12/inout/</url>
